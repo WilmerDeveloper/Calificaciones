@@ -23,7 +23,7 @@ class EntitiesController extends AppController {
         $this->layout = 'ajax';
         if (!empty($this->data)) {
             if ($this->Entity->save($this->data)) {
-                $this->Session->setFlash("Controlador creado con éxito", 'flash');
+                $this->Session->setFlash("Controlador creado con éxito", "flash");
                 $this->redirect(array('action' => 'index'));
             }
         }
@@ -45,6 +45,7 @@ class EntitiesController extends AppController {
     }
 
     public function delete($id) {
+        
         if ($this->Entity->delete($id)) {
             $this->Session->setFlash('Controlador borrado con éxito', 'flash');
             $this->redirect(array('action' => 'index'));

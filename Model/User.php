@@ -3,8 +3,7 @@
 class User extends AppModel {
 
     public $name = "User";
-    public $belongsTo = array('Group', 'Branch');
-    public $hasMany = array('Evaluation', 'Revision', 'Observation', 'Payment', 'Certification');
+    public $belongsTo = array('Group');
     public $actsAs = array(
         'Logable' => array(
             'userModel' => 'User',

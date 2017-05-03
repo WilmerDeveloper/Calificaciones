@@ -1,5 +1,4 @@
-
-    
+  
 
 <div id="content" align="center">
                 <section class="border-loging">

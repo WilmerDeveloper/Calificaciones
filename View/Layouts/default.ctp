@@ -1,4 +1,4 @@
- <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="es">
     <head>
         <meta charset="utf-8">
@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1">
         <meta name="description" content="">
         <meta name="author" content="">
-        
+
 
         <title>Calificación de documentos aspirantes</title>
         <?php echo $this->Html->css('/bower_components/bootstrap/dist/css/bootstrap.css'); ?>
@@ -105,25 +105,35 @@
             });
         </script>
         <div id="wrapper">
+            
+            <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <?php echo $this->Ajax->link("INICIO", array('controller' => 'Users', 'action' => 'search'), array('escape' => FALSE, 'update' => 'content', 'indicator' => 'loading', 'class' => "navbar-brand")); ?>
+
+                </div>
 
             <!-- Navigation -->
-            <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-                
-           
-                <ul class="nav navbar-top-links navbar-right">
-                    <li class="dropdown">
-                        <a class="dropdown-toggle" data-toggle="dropdown" href="#">
-                            <i class="fa fa-user fa-fw"></i>
+            
+
+            <ul class="nav navbar-top-links navbar-right">
+                <li class="dropdown">
+                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="fa fa-user fa-fw"></i>
                             <?php
                             App::import('Model', 'Group');
                             $gr = new Group();
                             $grupo = $gr->find('first', array('conditions' => array('Group.id' => AuthComponent::User('group_id'))));
                             echo AuthComponent::User('nombre') . " " . AuthComponent::User('primer_apellido') . " (" . $grupo['Group']['name'] . ")";
                             ?>
-                            <i class="fa fa-caret-down"></i>
-                        </a>
-                        <ul class="dropdown-menu dropdown-user">
-                            <li>
+                        <i class="fa fa-caret-down"></i>
+                    </a>
+                    <ul class="dropdown-menu dropdown-user">
+                        <li>
 
 
                                 <?php echo $this->Ajax->link(
@@ -139,39 +149,36 @@
                                 ?>
 
 
-                            </li>
-                            <li class="divider"></li>
-                            <li>
+                        </li>
+                        <li class="divider"></li>
+                        <li>
                                 <?php
                                 echo $this->Html->link("Salir", array('controller' => 'users', 'action' => 'logout'), array('class' => 'fa fa-sign-out fa-fw', 'escape' => FALSE, 'update' => 'content'));
                                 ?>
-                            </li>
-                        </ul>
-                        <!-- /.dropdown-user -->
-                    </li>
-                    <!-- /.dropdown -->
-                </ul>
-                </nav>
-                <!-- /.navbar-top-links -->
-                <!-- /.inicio del menu -->
+                        </li>
+                    </ul>
+                    <!-- /.dropdown-user -->
+                </li>
+                <!-- /.dropdown -->
+            </ul>
+            <!-- /.navbar-top-links -->
+            <!-- /.inicio del menu -->
 
-                                    <!-- /.sidebar-collapse -->
-                </div>
+            <!-- /.sidebar-collapse -->
+        </div>
 
-                <!-- /.navbar-static-side -->
-           <!-- /fin del menu -->
+        <!-- /.navbar-static-side -->
+        <!-- /fin del menu -->
 
-            
-                
-                <div class="row">
-                    <div class="col-lg-12">
-                        <h1 class="page-header"></h1>
-                    </div>
-                </div>
-                <div id="loading" style="display: none;">
+        <div class="row">
+            <div class="col-lg-12">
+                <h1 class="page-header"></h1>
+            </div>
+        </div>
+        <div id="loading" style="display: none;">
                     <?php echo $this->Html->image('loading.gif', array('border' => "0", 'align' => 'center')); ?>
-                </div>
-                <div id="content">
+        </div>
+        <div id="content">
                     <?php
                     $rutaArchivoSoportes = "files";
                     ?>
@@ -181,36 +188,36 @@
                     ?>
                     <?php echo $content_for_layout; ?>
                     <?php echo $this->element('sql_dump'); ?>  
-                </div>
-            </div>
-            <!-- /#page-wrapper -->
         </div>
-        <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
-            <div class="modal-dialog" style="width: 60%">
-                <div class="modal-content" >
-                    <div class="modal-header">
-                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                        <div id="banner" align="center">
+        <!-- /#page-wrapper -->
+    </div>
+    <div class="modal fade" id="edit" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+
+        <div class="modal-dialog" style="width: 60%">
+            <div class="modal-content" >
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <div id="banner" align="center">
                             <?php 
                             echo $this->Html->image('actualusu.png', array('width'=>'600','height'=>'auto')); 
                             ?> 
 
-                        </div>
                     </div>
+                </div>
 
 
-                    <!-- -->
+                <!-- -->
 
-                    <div class="modal-body" id="cont">
-
-                    </div>
-
-                    <!-- -->
-
+                <div class="modal-body" id="cont">
 
                 </div>
+
+                <!-- -->
+
+
             </div>
         </div>
-    </body>
+    </div>
+</body>
 </html>

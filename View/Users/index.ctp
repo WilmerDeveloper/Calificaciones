@@ -56,7 +56,7 @@
             <td style="font-size: small">
                 <table border="0" style="width:50px">
                     <tr>
-                        <td><?php echo $usuario['Branch']['nombre'] ?></td>
+                        <td><?php// echo $usuario['Branch']['nombre'] ?></td>
                     </tr>
                     <tr>
                         <td><?php echo substr($usuario['User']['email'], 0, 30) ?></td>

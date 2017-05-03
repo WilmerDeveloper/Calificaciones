@@ -26,20 +26,35 @@ class AppController extends Controller {
 
         $entity_id = $controlador->field('id', array('Entity.name' => $this->name));
 
-        if ($a->find('count', array('conditions' => array('Action.name' => $this->action, 'Action.entity_id' => $entity_id, 'ActionsGroup.group_id' => $user['group_id']))) > 0) {
+//        echo 'controlador ', $this->name, '<br>';
+//        echo 'action ', $this->action, '<br>';
+//        echo 'entity_id ', $entity_id, '<br>';
+//        echo 'group_id ', $user['group_id'], '<br>';
+        
+
+        $permitido = $a->find('count', array('conditions' => array('Action.name' => $this->action, 'Action.entity_id' => $entity_id, 'ActionsGroup.group_id' => $user['group_id'])));
+        
+//        echo "permisos", $permitido;
+//        exit;
+        
+        if ($permitido > 0) {
             return true;
         } else {
             $this->redirect(array('controller' => 'pages', 'action' => 'denied'));
             return false;
         }
+        
+//        return true;
     }
 
     function beforeFilter() {
+
         parent::beforeFilter();
         $this->Auth->allow(array('login', 'send', 'logout'));
 
         if ($this->name != "Users") {
             if (!AuthComponent::user('id')) {
+
                 $this->redirect(array('controller' => 'Users', 'action' => 'login'));
             }
         }
@@ -47,11 +62,11 @@ class AppController extends Controller {
         if (!$this->RequestHandler->isAjax()) {
             //Se realiza cuando la petición no es ajax. Cuando carga toda la página.
             $this->Session->write('Auth.redirect', null);
-            App::import("Model", "Call");
-            $Call = new Call();
-            $Call->recursive = -1;
-
-            $this->set('calls', $Call->find('list', array('fields' => array('Call.id', 'Call.nombre'), 'order' => array('Call.id DESC'))));
+//            App::import("Model", "Call");
+//            $Call = new Call();
+//            $Call->recursive = -1;
+//
+//            $this->set('calls', $Call->find('list', array('fields' => array('Call.id', 'Call.nombre'), 'order' => array('Call.id DESC'))));
         }
     }
 

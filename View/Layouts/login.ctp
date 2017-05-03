@@ -25,12 +25,12 @@
 
     </head>
     <body>
-        <div class = "container">
+        <div class="container">
 
             <div id="content">
                 <?php echo $this->Session->flash(); ?>
                 <?php echo $this->fetch('content'); ?>
-                <?php //echo $this->element('sql_dump'); ?>  
+                <?php echo $this->element('sql_dump'); ?>  
 
             </div>
             <hr/>

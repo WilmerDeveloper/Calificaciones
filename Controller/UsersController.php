@@ -36,8 +36,8 @@ class UsersController extends AppController {
                 $this->request->data['User']['id'] = $user['User']['id'];
 
                 if ($this->User->save($this->data)) {
-//                    $this->request->data['User']['group_id'] = $user['User']['group_id'];
-//                    $this->User->save($this->data);
+                    $this->request->data['User']['group_id'] = $user['User']['group_id'];
+                    $this->User->save($this->data);
                     $Email = new CakeEmail('gmail');
                     $Email->from(array('pdret.soporte@gmail.com' => 'Aplicativo PDRET'));
                     $Email->addTo($user['User']['email']);
@@ -103,17 +103,17 @@ class UsersController extends AppController {
         }
         if (empty($this->data) or empty($this->data['User']['busqueda'])) {
 
-            $this->set('User', $this->User->find('all', array('recursive' => 1, 'fields' => array('User.username', 'User.id', 'User.email', 'User.primer_apellido', 'User.nombre', 'Group.name', 'Branch.nombre'))));
+            $this->set('User', $this->User->find('all', array('recursive' => 1, 'fields' => array('User.username', 'User.id', 'User.email', 'User.primer_apellido', 'User.nombre', 'Group.name'))));
         } else {
 
             $this->set('User', $this->User->find('all', array(
                         'recursive' => 1,
                         'conditions' => array(
-                            'or' => array('Branch.nombre LIKE' => "%" . $this->data['User']['busqueda'] . "%", 'User.username LIKE' => "%" . $this->data['User']['busqueda'] . "%", 'User.primer_apellido LIKE ' => "%" . $this->data['User']['busqueda'] .
+                            'or' => array( 'User.username LIKE' => "%" . $this->data['User']['busqueda'] . "%", 'User.primer_apellido LIKE ' => "%" . $this->data['User']['busqueda'] .
                                 "%", 'User.nombre LIKE ' => "%" . $this->data['User']['busqueda'] . "%",
                                 'Group.name LIKE ' => "%" . $this->data['User']['busqueda'] . "%")
                         ),
-                        'fields' => array('User.username', 'User.nombre', 'User.primer_apellido', 'User.id', 'Branch.nombre', 'User.email', 'Group.name')
+                        'fields' => array('User.username', 'User.nombre', 'User.primer_apellido', 'User.id', 'User.email', 'Group.name')
             )));
         }
       
@@ -213,12 +213,12 @@ class UsersController extends AppController {
                 $this->redirect(array("controller" => 'users', 'action' => 'index'));
             } else {
                 $this->Session->setFlash("Error guardando datos", 'flash_error');
-                $this->set('branches', $this->User->Branch->find('list', array('order' => 'nombre ASC', 'fields' => array('id', 'nombre'))));
+//                $this->set('branches', $this->User->Branch->find('list', array('order' => 'nombre ASC', 'fields' => array('id', 'nombre'))));
                 $this->set('groups', $this->User->Group->find('list', array('conditions' => array('Group.id NOT' => array(1, 7)), 'order' => 'name ASC', 'fields' => array('id', 'name'))));
             }
         } else {
             
-            $this->set('branches', $this->User->Branch->find('list', array('order' => 'nombre ASC', 'fields' => array('id', 'nombre'))));
+//            $this->set('branches', $this->User->Branch->find('list', array('order' => 'nombre ASC', 'fields' => array('id', 'nombre'))));
             $this->set('groups', $this->User->Group->find('list', array('order' => 'name ASC')));
         }
     }
