@@ -12,6 +12,7 @@ class DocumentEducation extends AppModel {
     var $primaryKey = 'IDEDUCACIONASPIRANTE';
     var $belongsTo = array(
         'Candidate' => array("foreignKey" => "NRODOCUMENTO"),
+        'LevelEducation' => array("foreignKey" => "IDNIVELEDUCACION"),
     );
     var $actsAs = array('Logable' => array(
             'userModel' => 'User',

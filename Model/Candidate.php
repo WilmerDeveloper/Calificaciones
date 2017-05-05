@@ -10,8 +10,8 @@ class Candidate extends AppModel {
     var $name = "Candidate";
     var $useTable = "ASPIRANTE";
     var $primaryKey = 'NRODOCUMENTO';
-    var $hasMany = array('Documents','DocumentEducations', 'DocumentExperience');
-            
+    var $hasMany = array('Document', 'DocumentEducation', 'DocumentExperience');
+
     var $actsAs = array('Logable' => array(
             'userModel' => 'User',
             'userKey' => 'user_id',
