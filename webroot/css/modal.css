@@ -46,8 +46,26 @@ and open the template in the editor.
     box-shadow: 2px 2px 5px #999;
 }
 
+.report-user {
+    max-width: 1020px;
+    padding: 15px 16px 30px;
+    margin: 0 auto;
+    box-shadow: 2px 2px 5px #999;
+}
+
+.report-user-personal {
+    max-width: 920px;
+    margin: 0 auto;
+}
+
+
 .edit-form {
-    max-width: 420px;
+    max-width: 720px;
+    margin: 0 auto;
+}
+
+.search-form {
+    max-width: 300px;
     margin: 0 auto;
 }
 
