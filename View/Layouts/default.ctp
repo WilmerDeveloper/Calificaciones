@@ -114,6 +114,7 @@
                         <span class="icon-bar"></span>
                     </button>
                     <?php echo $this->Ajax->link("INICIO", array('controller' => 'Users', 'action' => 'search'), array('escape' => FALSE, 'update' => 'content', 'indicator' => 'loading', 'class' => "navbar-brand")); ?>
+                    <?php echo $this->Ajax->link("USUARIOS", array('controller' => 'Users', 'action' => 'index'), array('escape' => FALSE, 'update' => 'content', 'indicator' => 'loading', 'class' => "navbar-brand")); ?>
 
                 </div>
 
