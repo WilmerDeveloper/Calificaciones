@@ -1,3 +1,8 @@
+<?php
+echo $this->Html->css('modal.css');
+?>
+<section class="section-user">
+
 <?php echo $this->Ajax->link(
     'Registrar',
     array( 'controller' => "Users", "action" => "add", 1 ),
@@ -113,7 +118,7 @@
 );
 ?>
 
-
+</section>
 <div class="modal fade" id="add1" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
 
     <div class="modal-dialog" style="width: 60%">
