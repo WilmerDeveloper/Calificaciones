@@ -15,8 +15,10 @@
     
 </script>
 <div id="loading" style="display: none;">
-    <?php echo $this->Html->css('modal.css');
-    echo $this->Html->image('loading.gif', array('border' => "0", 'align' => 'center')); ?>
+    <?php 
+        echo $this->Html->css('modal.css');
+        echo $this->Html->image('loading.gif', array('border' => "0", 'align' => 'center')); 
+    ?>
 </div>
 <?php echo $this->Session->flash(); ?>
 <div id="fondo">
@@ -31,8 +33,6 @@
     echo $this->Form->input("User.cedula", array('label' => '', 'class' => 'form-control', 'required' => '', 'placeholder' => 'Cédula'));
     echo $this->Form->input("User.username", array('label' => '', 'class' => 'form-control', 'required' => '', 'placeholder' => 'Nombre De Usuario'));
     echo $this->Form->input("User.group_id", array('label' => '', 'class' => 'form-control', 'required' => '', 'empty' => ''));
-    echo $this->Form->input("User.branch_id", array('label' => '', 'class' => 'form-control', 'required' => '', 'empty' => ''));
-    echo $this->Form->input("User.tipo", array('label' => '', 'class' => 'form-control', 'required' => '', 'empty' => '', 'options' => array('Asociativo' => 'Asociativo', 'Familiar' => 'Familiar', 'Territorial' => 'Territorial', 'Global' => 'Global')));
     ?>
     <?php echo $this->Form->end(array('label' => "Guardar", 'class' => 'btn btn-success')) ?>
 </div>

@@ -10,29 +10,16 @@ class DocumentsController extends AppController {
     var $name = 'Documents';
 
     public function edit($id) {
-        if (empty($this->data)) {
 
-         $this->Document->recursive = 1;
-//            $this->data = $this->Document->find("first", array(
-//                "fields" => array('TypeDocument.*'),
-//                "conditions" => array("Document.IDDOCUMENTOASPIRANTE" => $id),
-//                "joins" => array(
-//                    array(
-//                        'table' => 'TIPOSDOCUMENTO',
-//                        'alias' => 'TypeDocument',
-//                        'type' => 'left',
-//                            'conditions' => array(
-//                                'Document.IDTIPODOCUMENTO = TypeDocument.IDTIPODEDOCUMENTO'
-//                            )
-//                    )
-//                )
-//            )
-//                    );
+        if (empty($this->data)) {
+            $this->Document->recursive = 1;
             $this->data = $this->Document->find("first", array("conditions" => array("Document.IDDOCUMENTOASPIRANTE" => $id)));
-        } else {
+        } 
+        else {
             if ($this->Document->save($this->data)) {
                 $this->Session->setFlash('Documento calificado con éxito', 'flash');
-                $this->redirect(array('controller' => 'Pages', 'action' => 'display'));
+                $criterio = $this->data['Candidate']['NRODOCUMENTO'];
+                $this->redirect(array('controller' => 'Candidates', 'action' => 'report', $criterio));
                 // $this->redirect(array('action' => 'index'));
             } else {
                 $this->Session->setFlash("Error guardando datos", 'flash');
@@ -42,5 +29,3 @@ class DocumentsController extends AppController {
     }
 
 }
-
-?>

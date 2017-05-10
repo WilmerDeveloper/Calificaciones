@@ -17,8 +17,8 @@ class DocumentEducationsController extends AppController {
         } else {
             if ($this->DocumentEducation->save($this->data)) {
                 $this->Session->setFlash('Documento educativo calificado con éxito', 'flash');
-                $this->redirect(array('controller' => 'Pages', 'action' => 'display'));
-                // $this->redirect(array('action' => 'index'));
+                $criterio = $this->data['Candidate']['NRODOCUMENTO'];
+                $this->redirect(array('controller' => 'Candidates', 'action' => 'report', $criterio));
             } else {
                 $this->Session->setFlash("Error guardando datos", 'flash');
                 $this->redirect(array('controller' => 'Pages', 'action' => 'display'));

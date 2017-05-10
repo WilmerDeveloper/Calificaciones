@@ -71,7 +71,9 @@ echo $this->Html->css('modal.css');
                     </tr>
                 </table>
             </td>
-            <td><?php
+            <td>
+                <center>
+                <?php
                 echo $this->Ajax->link("", array('controller' => "Users", "action" => "edit", $usuario['User']['id']), 
                                             array(  
                                             'update' => 'loadedit',
@@ -84,20 +86,7 @@ echo $this->Html->css('modal.css');
                 echo $this->Ajax->link('', array('controller' => 'Users', 'action' => 'delete', $usuario['User']['id']), array('update' => 'content', 'indicator' => 'loading', 'class' => 'btn btn-danger fa fa-trash'), '¿Desea eliminar el usuario?');
                 }
                 ?>
-            </td>
-            <td><?php echo $this->Ajax->link(" Asignados", 
-                                            array('controller' => "UserProyects", "action" => "index", $usuario['User']['id']), 
-                                            array(  
-                                            'update' => 'assing',
-                                            'complete' => '$("#assigned").modal("show")',
-                                            'class' => 'btn btn-success fa fa-desktop',
-                                            'type' => 'synchronous'
-                                            )    
-                    
-                                             ); 
-                    ?>
-            
-            
+                </center>   
             </td>
         </tr>
         <?php endforeach; ?>

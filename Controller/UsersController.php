@@ -31,7 +31,6 @@ class UsersController extends AppController {
                 }
 
                 $this->request->data['User']['password'] = $this->Auth->password($clave);
-                $this->request->data['User']['branch_id'] = $user['User']['branch_id'];
                 $this->request->data['User']['group_id'] = $user['User']['group_id'];
                 $this->request->data['User']['id'] = $user['User']['id'];
 
@@ -39,9 +38,9 @@ class UsersController extends AppController {
                     $this->request->data['User']['group_id'] = $user['User']['group_id'];
                     $this->User->save($this->data);
                     $Email = new CakeEmail('gmail');
-                    $Email->from(array('pdret.soporte@gmail.com' => 'Aplicativo PDRET'));
+                    $Email->from(array('pdret.soporte@gmail.com' => 'Calificación aspirantes'));
                     $Email->addTo($user['User']['email']);
-                    $Email->subject("Cambio de clave aplicativo PDRET");
+                    $Email->subject("Cambio de clave aplicativo CALIFICACIONES");
                     $Email->emailFormat('html');
 
                     $body = "Se ha cambiado exitosamente su clave, los datos de su cuenta son: <br>";
@@ -83,11 +82,9 @@ class UsersController extends AppController {
         }
     }
 
-    
-    public function search(){
+    public function search() {
         
     }
-
 
     public function logout() {
         $this->Session->setFlash('Su sesión ha expirado.', 'flash_error');
@@ -109,14 +106,13 @@ class UsersController extends AppController {
             $this->set('User', $this->User->find('all', array(
                         'recursive' => 1,
                         'conditions' => array(
-                            'or' => array( 'User.username LIKE' => "%" . $this->data['User']['busqueda'] . "%", 'User.primer_apellido LIKE ' => "%" . $this->data['User']['busqueda'] .
+                            'or' => array('User.username LIKE' => "%" . $this->data['User']['busqueda'] . "%", 'User.primer_apellido LIKE ' => "%" . $this->data['User']['busqueda'] .
                                 "%", 'User.nombre LIKE ' => "%" . $this->data['User']['busqueda'] . "%",
                                 'Group.name LIKE ' => "%" . $this->data['User']['busqueda'] . "%")
                         ),
                         'fields' => array('User.username', 'User.nombre', 'User.primer_apellido', 'User.id', 'User.email', 'Group.name')
             )));
         }
-      
     }
 
     public function edit($id) {
@@ -128,12 +124,10 @@ class UsersController extends AppController {
                 $this->redirect(array("controller" => 'users', 'action' => 'index'));
             } else {
                 $this->Session->setFlash("Error guardando datos", 'flash_error');
-                $this->set('branches', $this->User->Branch->find('list', array('order' => 'nombre ASC', 'fields' => array('id', 'nombre'))));
                 $this->set('groups', $this->User->Group->find('list', array('conditions' => array('Group.id NOT' => array(1, 7)), 'order' => 'name ASC', 'fields' => array('id', 'name'))));
             }
         } else {
-            $this->data = $this->User->find("first", array('recursive' => -1, "conditions" => array("User.id" => $id), 'fields' => array('user.*')));
-            $this->set('branches', $this->User->Branch->find('list', array('order' => 'nombre ASC', 'fields' => array('id', 'nombre'))));
+            $this->data = $this->User->find("first", array("recursive" => "-1", "conditions" => array("User.id" => $id), "fields" => array("User.*")));
             $this->set('groups', $this->User->Group->find('list', array('order' => 'name ASC', 'fields' => array('id', 'name'))));
         }
     }
@@ -152,7 +146,7 @@ class UsersController extends AppController {
                     if ($this->request->data['User']['password1'] != "")
                         $this->request->data['User']['password'] = $this->Auth->password($this->request->data['User']['password1']);
                     if ($this->User->save($this->data)) {
-                        $this->redirect(array('controller' => 'Pages', 'action' => "message", "Usuario editado con éxito."));
+                        $this->redirect(array('controller' => 'Users', 'action' => "index", "Usuario editado con éxito."));
                     } else {
                         $this->redirect(array('controller' => 'Pages', 'action' => "error", "Error guardando los datos."));
                     }
@@ -167,7 +161,7 @@ class UsersController extends AppController {
 
         $this->layout = "ajax";
         App::import('Vendor', 'ClassPhpmailer', array('file' => 'phpmailer/class.phpmailer.php'));
- 
+
         if (!empty($this->data)) {
 
             //Generamos la nueva clave de forma aleatorea
@@ -192,18 +186,18 @@ class UsersController extends AppController {
                 $mail->Port = 465; // Puerto a utilizar 
 //Con estas pocas líneas iniciamos una conexión con el SMTP. Lo que ahora deberíamos hacer, es configurar el mensaje a enviar, el //From, etc. 
                 $mail->From = "pdret.soporte@gmail.com"; // Desde donde enviamos (Para mostrar) 
-                $mail->FromName = "Soporte aplicativo PDRET";
+                $mail->FromName = "Soporte aplicativo CALIFICACIONES";
 
 //Estas dos líneas, cumplirían la función de encabezado (En mail() usado de esta forma: “From: Nombre <correo@dominio.com>”) de //correo. 
                 $mail->AddAddress($this->data['User']['email']);
                 $mail->IsHTML(true);
 //$mail->IsHTML(true); // El correo se envía como HTML 
-                $mail->Subject = utf8_decode("Creación usuario aplicativo PDRET"); // Este es el titulo del email. 
+                $mail->Subject = utf8_decode("Creación usuario aplicativo CALIFICACIONES"); // Este es el titulo del email. 
                 $body = "Se ha creado su usuario con los siguientes datos: <br>";
                 $body .= "<strong>Nombre: " . utf8_decode($this->data['User']['nombre']) . " " . utf8_decode($this->data['User']['primer_apellido']) . " " . utf8_decode($this->data['User']['segundo_apellido']) . "</strong><br>";
                 $body .= "<strong>Usuario: : " . utf8_decode($this->data['User']['username']) . "</strong><br>";
                 $body .= "<strong>Clave: " . $clave . "</strong><br>";
-                $body .= "<strong>" . utf8_decode("Puede ingresar desde la dirección: http://192.168.1.189:86/pdret") . "</strong><br>";
+                $body .= "<strong>" . utf8_decode("Puede ingresar desde la dirección: {A DETERMINAR}") . "</strong><br>";
                 $mail->Body = $body; // Mensaje a enviar 
 //$mail->SMTPDebug = 1;
 
@@ -217,7 +211,7 @@ class UsersController extends AppController {
                 $this->set('groups', $this->User->Group->find('list', array('conditions' => array('Group.id NOT' => array(1, 7)), 'order' => 'name ASC', 'fields' => array('id', 'name'))));
             }
         } else {
-            
+
 //            $this->set('branches', $this->User->Branch->find('list', array('order' => 'nombre ASC', 'fields' => array('id', 'nombre'))));
             $this->set('groups', $this->User->Group->find('list', array('order' => 'name ASC')));
         }

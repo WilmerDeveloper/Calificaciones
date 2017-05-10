@@ -2,13 +2,14 @@
 
 echo $this->Html->css('modal.css');
 ?>
+<?php //echo $candidate['Candidate']['NRODOCUMENTO'];?>
 <section class="report-user">
 <?php
                             echo $this->Ajax->link("Busqueda por aspirante", array('controller' => "Candidates", "action" => "search"), 
                                             array(  
                                             'update' => 'loadsearch',
                                             'complete' => '$("#search").modal("show")',
-                                            'class' => 'btn btn-info btn-lg',
+                                            'class' => 'btn btn-info btn-sm',
                                             'type' => 'synchronous'
                                             )
                                         );
@@ -41,7 +42,7 @@ echo $this->Html->css('modal.css');
                             </tr>
                         </tbody>
                         <tr>
-                        <th><center>Departamento</center></th>
+                            <th><center>Departamento</center></th>
                         <th><center>Ciudad</center></th>
                         <th><center>Dirección</center></th>
                         <th><center>Teléfono</center></th>
@@ -63,7 +64,7 @@ echo $this->Html->css('modal.css');
                     <h5><center><strong> Documentos personales</strong></center></h5>
                     <table class="table table-striped table-bordered table-hover">
                         <tr>
-                        <th><center>Documento</center></th>
+                            <th><center>Documento</center></th>
                         <th><center>Soporte</center></th>
                         <th><center>Concepto</center></th>
                         <th><center>Justificación</center></th>
@@ -78,15 +79,15 @@ echo $this->Html->css('modal.css');
                                 <td><?php echo $documentos['TypeDocument']['DOCUMENTO'];?> </td>
                                 <td>
                                     <a href="http://192.168.1.96:85/ASPIRANTE/DescargarArchivo?URLArchivo=E:\DOCUMENTOS_ASPIRANTES\<?php echo $candidate['Candidate']['NRODOCUMENTO'];?>\<?php echo $documentos['Document']['DOCUMENTO'];?>">
-                                        <center>Ver</center>
+                                        <center><span class="glyphicon glyphicon-search"></span></center>
                                     </a>
                                 </td>
                                 <td><?php echo $documentos['Document']['NIVELCUMPLIMIENTO'];?></td>
                                 <td><?php echo $documentos['Document']['JUSTIFICACION'];?></td>
                                 <td>
                         <center>
-                
-                
+
+
                 <?php
                 echo $this->Ajax->link("", array('controller' => "Documents", "action" => "edit", $documentos['Document']['IDDOCUMENTOASPIRANTE']), 
                                             array(  
@@ -99,13 +100,13 @@ echo $this->Html->css('modal.css');
                 
                 ?>
                         </center>
-                                </td>
-                            </tr>
+                        </td>
+                        </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
-                    
-                    
+
+
                     <h5><center><strong> Información de estudios</strong></center></h5>
                     <table class="table table-striped table-bordered table-hover">
                         <tr>
@@ -119,9 +120,9 @@ echo $this->Html->css('modal.css');
                         <th><center>Concepto</center></th>
                         <th><center>Justificación</center></th>
                         <th><center>Calificar</center></th>
-
-
                         </tr>
+                       
+                        
 
                         <tbody>
                             <?php foreach ($documentEducations as $educacion): ?>
@@ -129,18 +130,18 @@ echo $this->Html->css('modal.css');
                                 <td><?php echo $educacion['LevelEducation']['NIVEL'];?> </td>
                                 <td><?php echo $educacion['DocumentEducation']['NOMBREINSTITUCIONUNIVERSITARIA'];?></td>
                                 <td><?php echo $educacion['DocumentEducation']['PROGRAMA'];?></td>
-                                <td><?php echo $educacion['DocumentEducation']['GRADUADO'];?> </td>
+                                <td><center><?php echo $educacion['DocumentEducation']['GRADUADO'] ? "Si":"No";?></center></td>
                                 <td><?php echo $educacion['DocumentEducation']['FECHATERMINACION'];?></td>
                                 <td><?php echo $educacion['DocumentEducation']['FECHAGRADO'];?></td>
                                 <td>
                                     <a href="http://192.168.1.96:85/ASPIRANTE/DescargarArchivo?URLArchivo=E:\DOCUMENTOS_ASPIRANTES\<?php echo $candidate['Candidate']['NRODOCUMENTO'];?>\<?php echo $educacion['DocumentEducation']['DOCUMENTO'];?>">
-                                        <center>Ver</center>
+                                        <center><span class="glyphicon glyphicon-search"></span></center>
                                     </a>
                                 </td>
                                 <td><?php echo $educacion['DocumentEducation']['NIVELCUMPLIMIENTO'];?></td>
                                 <td><?php echo $educacion['DocumentEducation']['JUSTIFICACION'];?></td>
                                 <td>
-                                    <center>
+                        <center>
                                         <?php
                                         echo $this->Ajax->link("", array('controller' => "DocumentEducations", "action" => "edit", $educacion['DocumentEducation']['IDEDUCACIONASPIRANTE']), 
                                                                     array(  
@@ -152,17 +153,17 @@ echo $this->Html->css('modal.css');
                                                                 );
 
                                         ?>
-                                    </center>
-                                </td>
-                            </tr>
+                        </center>
+                        </td>
+                        </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
-                    
+
                     <h5><center><strong> Información de experiencia</strong></center></h5>
                     <table class="table table-striped table-bordered table-hover">
                         <tr>
-                        
+
                         <th><center>Empresa</center></th>
                         <th><center>Cargo</center></th>
                         <th><center>Actual</center></th>
@@ -181,12 +182,12 @@ echo $this->Html->css('modal.css');
                             <tr>
                                 <td><?php echo $experiencia['DocumentExperience']['EMPRESA'];?> </td>
                                 <td><?php echo $experiencia['DocumentExperience']['CARGO'];?></td>
-                                <td><?php echo $experiencia['DocumentExperience']['ACTUAL'];?></td>
+                                <td><center><?php echo $experiencia['DocumentExperience']['ACTUAL'] ? "Si" : "No" ;?></center></td>
                                 <td><?php echo $experiencia['DocumentExperience']['FECHAINGRESO'];?> </td>
                                 <td><?php echo $experiencia['DocumentExperience']['FECHASALIDA'];?></td>
                                 <td>
                                     <a href="http://192.168.1.96:85/ASPIRANTE/DescargarArchivo?URLArchivo=E:\DOCUMENTOS_ASPIRANTES\<?php echo $candidate['Candidate']['NRODOCUMENTO'];?>\<?php echo $experiencia['DocumentExperience']['DOCUMENTO'];?>">
-                                        <center>Ver</center>
+                                        <center><span class="glyphicon glyphicon-search"></span></center>
                                     </a>
                                 </td>
                                 <td><?php echo $experiencia['DocumentExperience']['NIVELCUMPLIMIENTO'];?></td>
@@ -202,20 +203,19 @@ echo $this->Html->css('modal.css');
                                                                     'type' => 'synchronous'
                                                                     )
                                                                 );
-
                                         ?>
                                     </center>
                                 </td>
-                            </tr>
+                        </tr>
                             <?php endforeach; ?>
                         </tbody>
                     </table>
 
-            <center>
-                
-                
+                    <center>
+
+
                 <?php
-                echo $this->Ajax->link("Calificar aspirante", array('controller' => "Candidates", "action" => "edit", $candidate['Candidate']['NRODOCUMENTO']), 
+                echo $this->Ajax->link(" Calificar aspirante", array('controller' => "Candidates", "action" => "edit", $candidate['Candidate']['NRODOCUMENTO']), 
                                             array(  
                                             'update' => 'loadconcept',
                                             'complete' => '$("#concept").modal("show")',
@@ -225,22 +225,11 @@ echo $this->Html->css('modal.css');
                                         );
                 
                 ?>
-                        </center>        
-                
-                    
-                    
-            <?php  
-//                var_dump($candidate);
-//                echo "<br>";
-//                echo "<br>";
-//                var_dump($documentEducations);
-//                echo "<br>";
-//                echo "<br>";
-//                var_dump($documentExperiences);
-//                echo "<br>";
-//                echo "<br>";
-//                var_dump($documents);
-            ?>
+                    </center>        
+
+
+
+            
                     <br/>
                 </div>
             </div>
@@ -258,13 +247,13 @@ echo $this->Html->css('modal.css');
             </div>
 
 
-                <!-- -->
+            <!-- -->
 
-                    <div class="modal-body" id="loadedit">
+            <div class="modal-body" id="loadedit">
 
-                    </div>
+            </div>
 
-                <!-- -->
+            <!-- -->
 
 
         </div>
@@ -281,13 +270,13 @@ echo $this->Html->css('modal.css');
             </div>
 
 
-                <!-- -->
+            <!-- -->
 
-                    <div class="modal-body" id="loadconcept">
+            <div class="modal-body" id="loadconcept">
 
-                    </div>
+            </div>
 
-                <!-- -->
+            <!-- -->
 
 
         </div>
@@ -295,24 +284,15 @@ echo $this->Html->css('modal.css');
 </div>
 
 <div class="modal fade" id="search" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-
     <div class="modal-dialog" style="width: 30%">
         <div class="modal-content" >
             <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
-                <div id="banner"><h3>Criterio de busqueda</h3></div>
+                <div id="banner"><?php echo $this->Html->image('searchpeople.png', array('width'=>'300','height'=>'auto')) ?></div>
             </div>
-
-
-                <!-- -->
-
                     <div class="modal-body" id="loadsearch">
 
                     </div>
-
-                <!-- -->
-
-
         </div>
     </div>
 </div>

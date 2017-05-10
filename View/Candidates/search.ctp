@@ -1,3 +1,16 @@
+<script>
+    $(document).ready(function () {
+        $("#formulario").validate({
+            rules: {
+                'data[Candidate][criterio]': {
+                    range: [1, 99999999999999999],
+                    digits: true,
+                    required: true
+                }                
+            }
+        });
+    });
+</script>
 <?php
 echo $this->Html->css('modal.css');
 ?>
