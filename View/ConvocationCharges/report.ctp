@@ -112,38 +112,6 @@ echo $this->Html->css('modal.css');
                     </table>
 
 
-
-
-                    <center>
-
-
-                <?php
-                echo $this->Ajax->link(" Calificar aspirante", array('controller' => "Candidates", "action" => "edit", $candidate['Candidate']['NRODOCUMENTO']), 
-                                            array(  
-                                            'update' => 'loadconcept',
-                                            'complete' => '$("#concept").modal("show")',
-                                            'class' => 'btn btn-success fa fa-pencil',
-                                            'type' => 'synchronous'
-                                            )
-                                        );
-                
-                ?>
-                    </center>        
-
-
-
-            <?php  
-//                var_dump($candidate);
-//                echo "<br>";
-//                echo "<br>";
-//                var_dump($documentEducations);
-//                echo "<br>";
-//                echo "<br>";
-//                var_dump($documentExperiences);
-//                echo "<br>";
-//                echo "<br>";
-//                var_dump($documents);
-            ?>
                     <br/>
                 </div>
             </div>
