@@ -138,7 +138,7 @@
 
 
                                 <?php echo $this->Ajax->link(
-                                'Mis datos',
+                                ' Mi perfil',
                                 array( 'controller' => "Users", "action" => "edit_user", 1 ),
                                 array(  
                                 'update' => 'cont',
