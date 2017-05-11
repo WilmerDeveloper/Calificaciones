@@ -112,24 +112,6 @@ echo $this->Html->css('modal.css');
                     </table>
 
 
-
-
-                     
-
-
-
-            <?php  
-//                var_dump($candidate);
-//                echo "<br>";
-//                echo "<br>";
-//                var_dump($documentEducations);
-//                echo "<br>";
-//                echo "<br>";
-//                var_dump($documentExperiences);
-//                echo "<br>";
-//                echo "<br>";
-//                var_dump($documents);
-            ?>
                     <br/>
                 </div>
             </div>
