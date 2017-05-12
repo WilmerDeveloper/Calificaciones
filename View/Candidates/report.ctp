@@ -2,7 +2,7 @@
 
 echo $this->Html->css('modal.css');
 ?>
-<?php //echo $candidate['Candidate']['NRODOCUMENTO'];?>
+
 <section class="report-user">
 <?php
                             echo $this->Ajax->link("Busqueda por aspirante", array('controller' => "Candidates", "action" => "search"), 
@@ -24,7 +24,7 @@ echo $this->Html->css('modal.css');
                     <h5><center><strong> Datos personales</strong></center></h5>
                     <table class="table table-striped table-bordered table-hover">
                         <tr>
-                            <th><center>Documento</center></th>
+                        <th><center>Documento</center></th>
                         <th><center>Nombre Completo</center></th>
                         <th><center>E-mail</center></th>
                         <th><center>Fecha de nacimiento</center></th>
@@ -226,10 +226,6 @@ echo $this->Html->css('modal.css');
                 
                 ?>
                     </center>        
-
-
-
-            
                     <br/>
                 </div>
             </div>
