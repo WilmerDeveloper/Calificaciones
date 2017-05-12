@@ -46,7 +46,7 @@ class AppController extends Controller {
     function beforeFilter() {
 
         parent::beforeFilter();
-        $this->Auth->allow(array('login', 'send', 'logout'));
+        $this->Auth->allow(array('login', 'send', 'logout', 'end'));
 
 
         if ($this->name != "Users" and $this->name != "Reclamations") {
