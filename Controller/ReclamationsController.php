@@ -10,6 +10,9 @@ class ReclamationsController extends AppController {
     var $name = 'Reclamations';
 
     public function send($hash_documento = null) {
+
+        $this->layout = "reclamation";
+
         if (empty($this->data)) {
             $candidate = $this->Reclamation->query('EXEC CONVOCATORIA_INSCRIPCION.dbo.candidateByNroDocumento "' . $hash_documento . '";');
             $this->set('candidate', $candidate);
@@ -31,19 +34,26 @@ class ReclamationsController extends AppController {
             if (!is_dir($rutaArchivo)) {
                 if (!mkdir($rutaArchivo)) {
                     echo "error creando archivo";
-                    //redirect
+                    $this->redirect(array('controller' => 'Reclamations', 'action' => "end"));
                 }
             }
 
             if (!empty($this->data['Reclamation']['archivo']['tmp_name'])) {
                 $nombrearchivo = "Reclamacion-" . $reclamacion_id[0][0]['id'] . ".pdf";
                 if (move_uploaded_file($this->data['Reclamation']['archivo']['tmp_name'], $rutaArchivo . DS . $nombrearchivo)) {
-                    $this->Session->setFlash('Archivo cargado exitosamente', 'flash');
+                    //$this->Session->setFlash('Archivo cargado exitosamente', 'flash');
+                    $this->redirect(array('action' => 'end'));
                 } else {
                     $this->Session->setFlash('Error adjuntando archivo, por favor intentelo nuevamente ', 'flash_error');
                 }
+            } else {
+                $this->redirect(array('action' => 'end'));
             }
         }
+    }
+
+    public function end() {
+        $this->layout = "reclamation";
     }
 
 }
