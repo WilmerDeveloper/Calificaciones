@@ -5,7 +5,7 @@ class DATABASE_CONFIG {
     public $default = array(
         'datasource' => 'Database/Sqlserver',
         'persistent' => false,
-        'host' => '192.168.1.80\portalestadistic',
+        'host' => '192.168.1.80\portalestadistic, 48601',
         'login' => 'usr_cargue',
         'password' => 'Adr*2017',
         'database' => 'CONVOCATORIA_INSCRIPCION',
