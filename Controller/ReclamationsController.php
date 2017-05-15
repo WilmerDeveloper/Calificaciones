@@ -37,28 +37,43 @@ class ReclamationsController extends AppController {
                 $reclamacion_id = $this->Reclamation->query('EXEC CONVOCATORIA_INSCRIPCION.dbo.newReclamation ' . $parametros_string . ';');
 
                 if ($reclamacion_id[0][0]['id'] == 0) {
-                    $this->redirect(array('action' => 'end', "Ya existe una reclamación para esta cédula"));
+                    $this->redirect(array('action' => 'end', 1));
                 }
 
                 if (!empty($this->data['Reclamation']['archivo']['tmp_name'])) {
                     $nombrearchivo = "Reclamacion-" . $reclamacion_id[0][0]['id'] . ".pdf";
                     if (move_uploaded_file($this->data['Reclamation']['archivo']['tmp_name'], $rutaArchivo . DS . $nombrearchivo)) {
-                        $this->redirect(array('action' => 'end', "Archivo guardado exitosamente"));
+                        $this->redirect(array('action' => 'end', 2));
                     } else {
-                        $this->redirect(array('action' => 'end', "Error adjuntando archivo"));
+                        $this->redirect(array('action' => 'end', 3));
                     }
                 } else {
-                    $this->redirect(array('action' => 'end', "Registro guardado exitosamente sin archivo"));
+                    $this->redirect(array('action' => 'end', 2));
                 }
             } else {
-                $this->redirect(array('action' => 'end', "Error adjuntando archivo"));
+                $this->redirect(array('action' => 'end', 3));
             }
         }
     }
 
     public function end($mensaje) {
         $this->layout = "reclamation";
-        $this->set('mensaje', $mensaje);
+        switch ($mensaje) {
+            case 1:
+                $imagen = "existe.png";
+                break;
+            case 2:
+                $imagen = "procesado.png";
+                break;
+            case 3:
+                $imagen = "error.png";
+                break;
+            default:
+                $imagen = "error.png";
+                break;
+        }
+
+        $this->set('imagen', $imagen);
     }
 
 }
