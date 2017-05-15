@@ -11,7 +11,7 @@ class DATABASE_CONFIG {
         'database' => 'RECLAMACION_CONVOCATORIA_INSCRIPCION',
 //        'prefix' => '',
 //        'encoding' => 'utf8',
-        'port' => '48601'
+        'port' => '1433'
     );
 
 //    public $default = array(
