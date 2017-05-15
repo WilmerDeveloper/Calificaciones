@@ -14,7 +14,7 @@ class ReclamationsController extends AppController {
         $this->layout = "reclamation";
 
         if (empty($this->data)) {
-            $candidate = $this->Reclamation->query('EXEC CONVOCATORIA_INSCRIPCION.dbo.candidateByNroDocumento "' . $hash_documento . '";');
+            $candidate = $this->Reclamation->query('EXEC dbo.candidateByNroDocumento "' . $hash_documento . '";');
             $this->set('candidate', $candidate);
             $this->set('hash_documento', $hash_documento);
         } else {
@@ -34,7 +34,7 @@ class ReclamationsController extends AppController {
                 $parametros_string = $separado_por_comas = implode(",", $parameters);
 
                 //si se obtiene como respuesta 0 significa que ya existia una reclamacion por esa cédula y no se crea el archivo
-                $reclamacion_id = $this->Reclamation->query('EXEC CONVOCATORIA_INSCRIPCION.dbo.newReclamation ' . $parametros_string . ';');
+                $reclamacion_id = $this->Reclamation->query('EXEC dbo.newReclamation ' . $parametros_string . ';');
 
                 if ($reclamacion_id[0][0]['id'] == 0) {
                     $this->redirect(array('action' => 'end', 1));
