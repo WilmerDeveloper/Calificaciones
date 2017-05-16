@@ -25,15 +25,26 @@ class ReclamationsController extends AppController {
                     $file_error = true;
                 }
             }
-            if ($this->data['Reclamation']["error"] == 1) {
-                $file_error = true;
+            if (isset($this->data['Reclamation']["error"])) {
+                if ($this->data['Reclamation']["error"]==1) {
+                    $file_error = true;
+                }
             }
             if (!$file_error) {
-                $parameters[] = '"' . $this->data['Reclamation']['hash_documento'] . '"';
-                $parameters[] = '"' . $this->data['Reclamation']['justificacion'] . '"';
+                $reemplazar = array('<', '>', '"', '–', "'", '+', '/', '*');
+
+                $justificacion = trim($this->data['Reclamation']['justificacion']);
+                $justificacion = str_replace($reemplazar, "", $justificacion);
+                
+                $hash = trim($this->data['Reclamation']['hash_documento']);
+                $hash = str_replace($reemplazar, "", $hash);
+
+                $parameters[] = "'" . $hash . "'";
+                $parameters[] = "'" . $justificacion . "'";
+
                 $parametros_string = $separado_por_comas = implode(",", $parameters);
 
-                //si se obtiene como respuesta 0 significa que ya existia una reclamacion por esa cédula y no se crea el archivo
+                //si se obtiene como respuesta 0 significa que ya existia una reclamacion por esa cédula y no se crea el archivo                
                 $reclamacion_id = $this->Reclamation->query('EXEC dbo.newReclamation ' . $parametros_string . ';');
 
                 if ($reclamacion_id[0][0]['id'] == 0) {
