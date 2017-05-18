@@ -29,7 +29,7 @@ echo $this->Html->css('modal.css');
                 <?php
                 echo $this->Form->create('Candidate', array('novalidate' => '', 'id' => 'formulario', 'role' => "form", "class" => "form", 'enctype' => 'multipart/form-data', 'type' => 'file', 'url' => array("action" => "edit", $this->data['Candidate']['NRODOCUMENTO'])));
                 echo $this->Form->hidden("Candidate.NRODOCUMENTO", array('value' => $this->data['Candidate']['NRODOCUMENTO']));
-                echo $this->Form->input("Candidate.NIVELCUMPLIMIENTO", array('label' => '', 'class' => 'form-control', 'required' => '', 'empty' => 'Calificación', 'options' => array('Cumple' => 'Cumple', 'No cumple' => 'No cumple')));
+                echo $this->Form->input("Candidate.NIVELCUMPLIMIENTO", array('label' => '', 'class' => 'form-control', 'required' => '', 'empty' => 'Calificación', 'options' => array('Cumple RM' => 'Cumple RM', 'No cumple Rm' => 'No cumple Rm')));
                 echo $this->Form->input("Candidate.JUSTIFICACION", array('placeholder' => 'Justificación', 'required' => '', 'class' => 'form-control', 'label'=>''));
                 echo '<br/>';
                 echo $this->Form->end(array('label' => "Guardar", 'class' => 'btn btn-success'));
