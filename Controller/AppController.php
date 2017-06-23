@@ -48,9 +48,9 @@ class AppController extends Controller {
         parent::beforeFilter();
         $this->Auth->allow(array('login', 'send', 'logout', 'end'));
 
-        $modelosAutorizados = array("Reclamations", "Complains");
+        $modelosAutorizados = array("Reclamations", "Complains", "Protests");
 
-        if ($this->name != "Users" and ! in_array($this->name, $modelosAutorizados)) {
+        if ($this->name != "Users" and !in_array($this->name, $modelosAutorizados)) {
             if (!AuthComponent::user('id')) {
                 $this->redirect(array('controller' => 'Users', 'action' => 'login'));
             }
